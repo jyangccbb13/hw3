@@ -66,8 +66,24 @@ void dealloc(Node* head)
 //   Add any helper functions or
 //   function object struct declarations
 // -----------------------------------------------
+struct odd {
+    bool operator()(int value) const 
+    {
+        return (value%2 == 1);
+    }
+};
 
+void testllpivot(Node*& head, int pivot)
+{
+    Node* smaller = nullptr;
+    Node* larger = nullptr;
 
+    llpivot(head, smaller, larger, pivot);
+    cout << "smaller: " << endl;
+    print(smaller);
+    cout << "larger:" << endl;
+    print(larger);
+}
 
 
 
@@ -82,13 +98,18 @@ int main(int argc, char* argv[])
     // Feel free to update any code below this point
     // -----------------------------------------------
     Node* head = readList(argv[1]);
+    Node* headCopy = head;
     cout << "Original list: ";
     print(head);
 
     // Test out your linked list code
-
-
-
+    int pivot = 10;
+    testllpivot(head, pivot);
+    cout << "copy list:" << endl;
+    print(headCopy);
+    cout << "filtered: " << endl;
+    Node* filtered = llfilter(headCopy, odd());
+    print(filtered);
     
     return 0;
 
